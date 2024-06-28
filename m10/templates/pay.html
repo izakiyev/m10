@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Payment Successful</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2>Thank you for your purchase!</h2>
+            <p>Your payment was successful.</p>
+            <p>Order details:</p>
+            <ul>
+                <li><strong>Order ID:</strong> {{ order.id }}</li>
+                <li><strong>User:</strong> {{ order.user.username }}</li>
+                <li><strong>Total Amount:</strong> ${{ order.total_price }}</li>
+                <!-- Add more details as needed -->
+            </ul>
+            <p><a href="{% url 'index' %}">Return to Home</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Barcode Scanner. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

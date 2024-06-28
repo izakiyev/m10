@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Scanner and Product Details</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Barcode Scanner and Product Details</h1>
+        </div>
+    </header>
+    <h1>Welcome, {{ request.user.username }}</h1>
+    <p>Your balance: ${{ profile.balance }}</p>
+    <main class="container">
+        <section class="product-scanner">
+            <h2>Product Scanner</h2>
+            <video id="scanner-video" autoplay></video>
+            <form id="barcode-form">
+                <label for="barcode-input">Enter Barcode:</label>
+                <input type="text" id="barcode-input" name="barcode" placeholder="Enter barcode...">
+                <button type="submit" id="submit_button">Submit</button>
+            </form>
+        </section>
+
+        <section class="product-details">
+            <h2>Product Details</h2>
+            <div id="product-info">
+                <p><strong>Name:</strong> <span id="product-name"></span></p>
+                <p><strong>Barcode:</strong> <span id="product-barcode"></span></p>
+                <p><strong>Price:</strong> <span id="product-price"></span></p>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1">
+                <button id="add-to-cart">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <h2>Shopping Cart</h2>
+            <ul id="shopping-cart">
+                <!-- Cart items will be dynamically added here -->
+            </ul>
+            <form action="{% url 'pay_now' %}" method="post">
+                {% csrf_token %}
+                <div id="total-amount"></div>
+                <input type="hidden" name="total_amount" id="total-input">
+                <button type="submit" id="pay-button">Pay Now</button>
+            </form>
+            
+            
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Barcode Scanner. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
